@@ -31,7 +31,7 @@ services:
         restart: unless-stopped
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: plane_tickets
+            MYSQL_DATABASE: plane_tickets_api
             MYSQL_USER: laravel
             MYSQL_PASSWORD: 12345
         volumes:

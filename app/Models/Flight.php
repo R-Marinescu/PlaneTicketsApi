@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Flight extends Model
 {
-    public function origin() {
-        return $this->belongsTo(Origin::class, 'origin_id');
+    public function flightOrigins() {
+        return $this->belongsTo(FlightOrigin::class, 'origin_id');
+    }
+
+    public function flightDestinations() {
+        return $this->belongsTo(FlightDestination::class, 'destination_id');
     }
 
     public function bookings() {

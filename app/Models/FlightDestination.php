@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Origin extends Model
+class FlightDestination extends Model
 {
 
     public function flights() {
-        return $this->hasMany(Flight::class, 'origin_id');
+        $this->hasMany(Flight::class, 'destination_id');
     }
 }
