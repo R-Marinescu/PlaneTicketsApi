@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 Route::resource('passengers', PassengerController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
 
 //FlightOrigin
-
 Route::resource('flight-origins', FlightOriginController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
 
 // FlightDestination
