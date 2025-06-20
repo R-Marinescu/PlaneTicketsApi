@@ -42,7 +42,9 @@ class PassengerController
             'password' => $request->filled('password') ? bcrypt($request->input('password')) : $passenger->password,
         ]);
 
-        return response()->json(['message' => 'Passenger updated successfully', 'data' => new PassengerResource($passenger)], 200);
+        return response()->json([
+            'message' => 'Passenger updated successfully',
+            'data' => new PassengerResource($passenger)], 200);
     }
 
     public function destroy($id) {

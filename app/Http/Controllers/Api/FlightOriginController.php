@@ -41,6 +41,11 @@ class FlightOriginController
             'country' => $request->filled('country') ? $request->input('country') : $flightOrigin->country,
             'city' => $request->filled('city') ? $request->input('city') : $flightOrigin->city,
         ]);
+
+        return response()->json([
+            'message' => 'Flight origin updated successfully',
+            'data' => new FlightOriginResource($flightOrigin)],
+            200);
     }
 
     public function destroy($id) {

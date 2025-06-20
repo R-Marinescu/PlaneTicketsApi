@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Flight extends Model
 {
+    protected $fillable = [
+        'flight_number',
+        'origin_id',
+        'destination_id',
+    ];
+
     public function flightOrigins() {
         return $this->belongsTo(FlightOrigin::class, 'origin_id');
     }
