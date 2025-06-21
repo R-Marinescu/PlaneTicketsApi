@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
 
+    protected $fillable = [
+        'passenger_id',
+        'flight_id',
+        'status',
+    ];
+
     public function flight() {
         return $this->belongsTo(Flight::class, 'flight_id');
     }

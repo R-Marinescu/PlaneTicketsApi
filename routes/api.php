@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\FlightController;
 use App\Http\Controllers\Api\FlightDestinationController;
 use App\Http\Controllers\Api\FlightOriginController;
 use App\Http\Controllers\Api\PassengerController;
+use App\Http\Controllers\Api\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 //Passengers
@@ -17,3 +19,9 @@ Route::resource('flight-destinations', FlightDestinationController::class)->only
 
 // Flights
 Route::resource('flights', FlightController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+
+// Bookings
+Route::resource('bookings', BookingController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+
+// Payments
+Route::resource('payments', PaymentController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
