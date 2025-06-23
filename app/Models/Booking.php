@@ -8,7 +8,7 @@ class Booking extends Model
 {
 
     protected $fillable = [
-        'passenger_id',
+        'user_id',
         'flight_id',
         'status',
     ];
@@ -18,7 +18,7 @@ class Booking extends Model
     }
 
     public function passenger () {
-        return $this->belongsTo(Passenger::class, 'passenger_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function payments() {

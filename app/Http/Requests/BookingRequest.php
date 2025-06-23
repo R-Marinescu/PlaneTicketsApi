@@ -22,7 +22,7 @@ class BookingRequest extends FormRequest
      */
     public function rules() {
         return [
-            'passenger_id' => $this->isMethod('POST') ? 'required|exists:passengers,id' : 'sometimes|exists:passengers,id',
+            'user_id' => $this->isMethod('POST') ? 'required|exists:passengers,id' : 'sometimes|exists:passengers,id',
             'flight_id' => $this->isMethod('POST') ? 'required|exists:flights,id' : 'sometimes|exists:flights,id',
             'status' => $this->isMethod('POST') ? 'nullable|in:pending,confirmed,cancelled' : 'sometimes|in:pending,confirmed,cancelled',
         ];

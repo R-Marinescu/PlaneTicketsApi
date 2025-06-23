@@ -12,8 +12,8 @@ return new class extends Migration
     public function up() {
         Schema::create('bookings', function(Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('passenger_id');
-            $table->integer('flight_id');
+            $table->bigInteger('user_id');
+            $table->bigInteger('flight_id');
             $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
             $table->timestamps();
         });

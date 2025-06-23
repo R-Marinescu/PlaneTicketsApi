@@ -4,12 +4,13 @@ use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\FlightController;
 use App\Http\Controllers\Api\FlightDestinationController;
 use App\Http\Controllers\Api\FlightOriginController;
-use App\Http\Controllers\Api\PassengerController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\RoleController;
 use Illuminate\Support\Facades\Route;
 
 //Passengers
-Route::resource('passengers', PassengerController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+Route::resource('users', UserController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
 
 //FlightOrigin
 Route::resource('flight-origins', FlightOriginController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
@@ -25,3 +26,6 @@ Route::resource('bookings', BookingController::class)->only(['index', 'show', 's
 
 // Payments
 Route::resource('payments', PaymentController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+
+// Roles
+Route::resource('roles', RoleController::class)->only(['index', 'show', 'store', 'update', 'destroy']);

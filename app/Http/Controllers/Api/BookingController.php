@@ -23,7 +23,7 @@ class BookingController
 
     public function store(BookingRequest $request) {
         $booking = Booking::create([
-            'passenger_id' => $request->input('passenger_id'),
+            'user_id' => $request->input('user_id'),
             'flight_id' => $request->input('flight_id'),
             'status' => $request->input('status', 'pending'),
         ]);
@@ -38,7 +38,7 @@ class BookingController
         $booking = Booking::findOrFail($id);
 
         $booking->update([
-           'passenger_id' => $request->filled('passenger_id') ? $request->input('passenger_id') : $booking->passenger_id,
+           'user_id' => $request->filled('user_id') ? $request->input('user_id') : $booking->user_id,
             'flight_id' => $request->filled('flight_id') ? $request->input('flight_id') : $booking->flight_id,
             'status' => $request->filled('status') ? $request->input('status') : $booking->status,
         ]);
