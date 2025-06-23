@@ -25,7 +25,7 @@ class UserRequest extends FormRequest
         return [
             'first_name' => $this->isMethod('POST') ? 'required|string|max:255' : 'sometimes|string|max:255',
             'last_name' => $this->isMethod('POST') ? 'required|string|max:255' : 'sometimes|string|max:255',
-            'email' => $this->isMethod('POST') ? 'required|email|max:255|unique:passengers,email' : 'sometimes|email|max:255|unique:passengers,email,' . $this->route('passenger'),
+            'email' => $this->isMethod('POST') ? 'required|email|max:255|unique:users,email' : 'sometimes|email|max:255|unique:users,email,' . $this->route('passenger'),
             'password' => $this->isMethod('POST') ? 'required|string|min:5' : 'sometimes|string|min:5',
         ];
     }

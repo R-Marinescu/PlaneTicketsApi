@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\RoleController;
 use Illuminate\Support\Facades\Route;
 
-//Passengers
+//User
 Route::resource('users', UserController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
 
 //FlightOrigin
