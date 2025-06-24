@@ -31,6 +31,8 @@ class UserController
             'password' => bcrypt($request->input('password')),
         ]);
 
+        $user->assignRoleByName($request->input('role_name', 'passenger'));
+
         return response()->json(['message' => 'User created successfully', 'data' => new UserResource($user)], 201);
     }
 
