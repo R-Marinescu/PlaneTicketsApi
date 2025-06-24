@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('role')->default(1); // Default role is 1 (passenger)
             $table->timestamps();
         });
     }

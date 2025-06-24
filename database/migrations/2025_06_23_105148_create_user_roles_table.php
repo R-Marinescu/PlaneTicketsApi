@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_roles', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('user_id');
-            $table->bigInteger('role_id');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('role_id')->constrained();
+            $table->primary(['user_id', 'role_id']); // Composite primary key
             $table->timestamps();
         });
     }
