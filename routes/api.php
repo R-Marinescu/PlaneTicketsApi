@@ -4,13 +4,25 @@ use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\FlightController;
 use App\Http\Controllers\Api\FlightDestinationController;
 use App\Http\Controllers\Api\FlightOriginController;
+use App\Http\Controllers\Api\TestIndexController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/register', [UserController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/home', [TestIndexController::class, 'home']);
+});
+
 //User
-Route::resource('users', UserController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::resource('users', UserController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+});
 
 //FlightOrigin
 Route::resource('flight-origins', FlightOriginController::class)->only(['index', 'show', 'store', 'update', 'destroy']);

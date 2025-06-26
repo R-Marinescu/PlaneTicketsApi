@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+class User extends Authenticatable
 {
     use HasFactory, HasApiTokens, Notifiable;
+
     protected $fillable = [
         'first_name',
         'last_name',
@@ -17,7 +18,7 @@ class User extends Model
         'password',
     ];
     public function bookings() {
-        return $this->hasMany(Booking::class, 'booking_id');
+        return $this->hasMany(Booking::class, 'user_id');
     }
 
     public function roles()

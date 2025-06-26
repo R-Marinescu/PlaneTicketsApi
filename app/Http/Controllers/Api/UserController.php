@@ -21,9 +21,6 @@ class UserController
     }
 
     public function store(UserRequest $request) {
-
-
-
         $user = User::create([
             'first_name' => $request->input('first_name'),
             'last_name' => $request->input('last_name'),
@@ -34,6 +31,19 @@ class UserController
         $user->assignRoleByName($request->input('role_name', 'passenger'));
 
         return response()->json(['message' => 'User created successfully', 'data' => new UserResource($user)], 201);
+    }
+
+    public function register(UserRequest $request) {
+        $user = User::create([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ]);
+
+        $user->assignRoleByName('passenger');
+
+        return response()->json(['message' => 'User registered successfully', 'data' => new UserResource($user)], 201);
     }
 
     public function update(UserRequest $request, $id){
