@@ -17,6 +17,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanc
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/home', [TestIndexController::class, 'home']);
+    Route::post('payments/create-intent', [PaymentController::class, 'createIntent'])->name('payments.create-intent');
 });
 
 //User

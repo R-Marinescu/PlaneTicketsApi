@@ -4,10 +4,55 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\PaymentRequest;
 use App\Http\Resources\PaymentResource;
+use App\Models\Booking;
 use App\Models\Payment;
+use App\Services\StripeService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController
 {
+
+    protected $stripe;
+
+    public function __construct(StripeService $stripe) {
+        $this->stripe = $stripe;
+    }
+
+    public function createIntent(PaymentRequest $request) {
+        $validated = $request->validated();
+
+        $booking = Booking::where('id', $validated['booking_id'])
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        try {
+            $intent = $this->stripe->createPaymentIntent(
+                $validated['amount'],
+                $validated['currency'] ?? 'usd'
+            );
+
+            $booking->payment()->create([
+                'stripe_payment_intent_id' => $intent->id,
+                'amount' => $validated['amount'],
+                'currency' => $validated['currency'] ?? 'usd',
+                'status' => $intent->status,
+            ]);
+
+            return response()->json([
+               'client_secret' => $intent->client_secret,
+                'amount' => $intent->amount,
+                'currency' => $intent->currency,
+                'status' => $intent->status,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to create payment intent',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function index() {
         $payments = Payment::paginate(request('per_page', 15));
 

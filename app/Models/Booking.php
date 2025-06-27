@@ -17,11 +17,11 @@ class Booking extends Model
         return $this->belongsTo(Flight::class, 'flight_id');
     }
 
-    public function passenger () {
+    public function users() {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function payments() {
-        return $this->belongsTo(Payment::class, 'booking_id');
+    public function payment() {
+        return $this->hasOne(Payment::class, 'booking_id');
     }
 }

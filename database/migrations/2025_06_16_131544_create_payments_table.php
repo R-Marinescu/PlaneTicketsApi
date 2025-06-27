@@ -13,7 +13,9 @@ return new class extends Migration
         Schema::create('payments', function(Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('booking_id');
+            $table->string('stripe_payment_intent_id')->unique();
             $table->decimal('amount', 10, 2);
+            $table->string('currency')->default('USD');
             $table->string('status')->default('pending');
             $table->timestamps();
         });

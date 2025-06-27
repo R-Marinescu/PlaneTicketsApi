@@ -26,7 +26,8 @@ class PaymentRequest extends FormRequest
 
         return [
             'booking_id' => $this->isMethod('POST') ? 'required|exists:bookings,id' : 'sometimes|exists:bookings,id',
-            'amount' => $this->isMethod('POST') ? 'required|numeric|min:0' : 'sometimes|numeric|min:0',
+            'amount' => $this->isMethod('POST') ? 'required|numeric|min:0.5' : 'sometimes|numeric|min:0.5',
+            'currency' => $this->isMethod('POST') ? 'nullable|string' : 'sometimes|string',
             'status' => $this->isMethod('POST') ? 'nullable|in:pending,completed,failed' : 'sometimes|in:pending,completed,failed',
         ];
     }

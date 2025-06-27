@@ -18,7 +18,6 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request): JsonResponse
     {
-        dd('edw?');
         // Attempt authentication
         if (!Auth::attempt($request->validated())) {
             throw ValidationException::withMessages([
