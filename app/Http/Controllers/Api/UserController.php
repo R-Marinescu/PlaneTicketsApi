@@ -14,6 +14,11 @@ class UserController
         return UserResource::collection($users)->response();
     }
 
+    public function me(UserRequest $request)
+    {
+        return new UserResource($request->user());
+    }
+
     public function show($userId) {
         $user = User::findOrFail($userId);
 

@@ -20,10 +20,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('payments/create-intent', [PaymentController::class, 'createIntent'])->name('payments.create-intent');
 });
 
-//User
-Route::middleware(['auth:sanctum', 'admin'])->group(function () {
-    Route::resource('users', UserController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
-});
+//User for testing purposes
+Route::resource('users', UserController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'me']);
+//Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+//    Route::resource('users', UserController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+//});
 
 //FlightOrigin
 Route::resource('flight-origins', FlightOriginController::class)->only(['index', 'show', 'store', 'update', 'destroy']);

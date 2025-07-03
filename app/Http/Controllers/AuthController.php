@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -21,21 +22,21 @@ class AuthController extends Controller
         // Attempt authentication
         if (!Auth::attempt($request->validated())) {
             throw ValidationException::withMessages([
-                'email' => __('auth.failed'), // Translation-ready error
+                'email' => __('auth.failed'),
             ]);
         }
 
-        // Revoke existing tokens (optional for security)
         $request->user()->tokens()->delete();
 
         $token = $request->user()->createToken(
             name: 'api-token',
-            abilities: ['*'] // Or specify abilities: ['create', 'read']
+            abilities: ['*']
         )->plainTextToken;
 
         return response()->json([
             'token' => $token,
-            'user' => $request->user()->load('roles'), // Eager load relationships
+            'user' => new UserResource ($request->user()),
+            'user_role' => $request->user()->load('roles'), // Eager load relationships
         ]);
     }
 
