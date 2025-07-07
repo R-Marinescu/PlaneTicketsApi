@@ -31,10 +31,15 @@ class AuthController extends Controller
         $token = $request->user()->createToken(
             name: 'api-token',
             abilities: ['*']
-        )->plainTextToken;
+        );
+
+        $expiresAt = now()->addSeconds(30);
+        $token->accessToken->expires_at = $expiresAt;
+        $token->accessToken->save();
 
         return response()->json([
-            'token' => $token,
+            'token' => $token->plainTextToken,
+            'expires_at' => $expiresAt->toIsoString(),
             'user' => new UserResource ($request->user()),
             'user_role' => $request->user()->load('roles'), // Eager load relationships
         ]);
