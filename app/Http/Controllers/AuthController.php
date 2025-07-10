@@ -19,11 +19,10 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request): JsonResponse
     {
-        // Attempt authentication
-        if (!Auth::attempt($request->validated())) {
-            throw ValidationException::withMessages([
-                'email' => __('auth.failed'),
-            ]);
+        if(!Auth::attempt($request->validated())) {
+            return response()->json([
+               'message' => __('Invalid credentials'),
+            ], 401);
         }
 
         $request->user()->tokens()->delete();
