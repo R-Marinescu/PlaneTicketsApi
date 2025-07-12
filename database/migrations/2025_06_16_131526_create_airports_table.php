@@ -9,13 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('flight_origins', function(Blueprint $table) {
+    public function up() {
+        Schema::create('airports', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('airport');
-            $table->string('country');
+            $table->string('name');
+            $table->string('iata_code')->unique();
             $table->string('city');
+            $table->string('country');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('origins');
+        Schema::dropIfExists('destinations');
     }
 };

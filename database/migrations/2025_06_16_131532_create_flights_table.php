@@ -13,8 +13,8 @@ return new class extends Migration
         Schema::create('flights', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('flight_number')->unique();
-            $table->integer('origin_id');
-            $table->integer('destination_id');
+            $table->integer('origin_id')->constrained('airports')->onDelete('cascade');
+            $table->integer('destination_id')->constrained('airports')->onDelete('cascade');
             $table->timestamps();
         });
     }

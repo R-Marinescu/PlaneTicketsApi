@@ -4,15 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FlightDestination extends Model
+class Airport extends Model
 {
     protected $fillable = [
-        'airport',
+        'name',
+        'iata_code',
         'country',
         'city',
     ];
 
-    public function flights() {
+    public function departures() {
+        $this->hasMany(Flight::class, 'destination_id');
+    }
+
+    public function arrivals() {
         $this->hasMany(Flight::class, 'destination_id');
     }
 }

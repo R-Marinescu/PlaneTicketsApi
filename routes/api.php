@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\FlightController;
-use App\Http\Controllers\Api\FlightDestinationController;
+use App\Http\Controllers\Api\AirportController;
 use App\Http\Controllers\Api\FlightOriginController;
 use App\Http\Controllers\Api\TestIndexController;
 use App\Http\Controllers\Api\UserController;
@@ -27,11 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'me']);
 //    Route::resource('users', UserController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
 //});
 
-//FlightOrigin
-Route::resource('flight-origins', FlightOriginController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
-
-// FlightDestination
-Route::resource('flight-destinations', FlightDestinationController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+// Airport
+Route::resource('airports', AirportController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
 
 // Flights
 Route::resource('flights', FlightController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
