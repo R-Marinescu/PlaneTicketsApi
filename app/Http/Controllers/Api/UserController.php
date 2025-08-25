@@ -14,7 +14,7 @@ class UserController
         return UserResource::collection($users)->response();
     }
 
-    public function me(UserRequest $request)
+    public function getAuthenticatedUser(UserRequest $request)
     {
         return new UserResource($request->user());
     }

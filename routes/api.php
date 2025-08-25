@@ -3,7 +3,6 @@
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\FlightController;
 use App\Http\Controllers\Api\AirportController;
-use App\Http\Controllers\Api\FlightOriginController;
 use App\Http\Controllers\Api\TestIndexController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\PaymentController;
@@ -22,7 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 //User for testing purposes
 Route::resource('users', UserController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
-Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'me']);
+Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getAuthenticatedUser']);
 //Route::middleware(['auth:sanctum', 'admin'])->group(function () {
 //    Route::resource('users', UserController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
 //});
