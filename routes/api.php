@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\FlightController;
 use App\Http\Controllers\Api\AirportController;
@@ -21,10 +22,12 @@ Route::middleware('auth:sanctum')->group(function () {
 
 //User for testing purposes
 Route::resource('users', UserController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+
 Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getAuthenticatedUser']);
-//Route::middleware(['auth:sanctum', 'admin'])->group(function () {
-//    Route::resource('users', UserController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
-//});
+
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users');
+});
 
 // Airport
 Route::resource('airports', AirportController::class)->only(['index', 'show', 'store', 'update', 'destroy']);

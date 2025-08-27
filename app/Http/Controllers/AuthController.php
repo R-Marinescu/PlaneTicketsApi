@@ -32,7 +32,7 @@ class AuthController extends Controller
             abilities: ['*']
         );
 
-        $expiresAt = now()->addSeconds(30);
+        $expiresAt = now()->addMinutes(30);
         $token->accessToken->expires_at = $expiresAt;
         $token->accessToken->save();
 
