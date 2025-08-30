@@ -37,11 +37,10 @@ class AuthController extends Controller
         $token->accessToken->save();
 
         return response()->json([
-            'token' => $token->plainTextToken,
             'expires_at' => $expiresAt->toIsoString(),
             'user' => new UserResource ($request->user()),
             'user_role' => $request->user()->load('roles'), // Eager load relationships
-        ]);
+        ])->cookie('token', $token->plainTextToken, 60, '/', null, true, true);
     }
 
     public function logout(Request $request): JsonResponse
