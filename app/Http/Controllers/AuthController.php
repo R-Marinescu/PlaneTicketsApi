@@ -25,22 +25,11 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $request->user()->tokens()->delete();
-
-        $token = $request->user()->createToken(
-            name: 'api-token',
-            abilities: ['*']
-        );
-
-        $expiresAt = now()->addMinutes(30);
-        $token->accessToken->expires_at = $expiresAt;
-        $token->accessToken->save();
+        $request->session()->regenerate();
 
         return response()->json([
-            'expires_at' => $expiresAt->toIsoString(),
-            'user' => new UserResource ($request->user()),
-            'user_role' => $request->user()->load('roles'), // Eager load relationships
-        ])->cookie('token', $token->plainTextToken, 60, '/', null, true, true);
+            'user' => new UserResource($request->user()->load('roles')),
+        ]);
     }
 
     public function logout(Request $request): JsonResponse
